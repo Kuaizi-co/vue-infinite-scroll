@@ -5,3 +5,5 @@ coverage
 .jshintrc
 vue-infinite-scroll.js
 *.log
+yarn.lock
+package-lock.json
