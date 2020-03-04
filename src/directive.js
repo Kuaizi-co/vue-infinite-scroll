@@ -186,7 +186,7 @@ export default {
       expression: binding.value
     };
     const args = arguments;
-    el[ctx].vm.$on('hook:mounted', function () {
+    const mounted = function () {
       el[ctx].vm.$nextTick(function () {
         if (isAttached(el)) {
           doBind.call(el[ctx], args);
@@ -206,7 +206,10 @@ export default {
 
         tryBind();
       });
-    });
+    };
+
+    // To fix element in slot, It's not trigger hook mounted event.
+    el[ctx].vm.$el ? mounted() : el[ctx].vm.$on('hook:mounted', mounted);
   },
 
   unbind(el) {
